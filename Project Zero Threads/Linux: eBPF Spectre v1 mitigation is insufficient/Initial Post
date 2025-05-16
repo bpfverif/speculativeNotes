@@ -1,0 +1,29 @@
+[I started talking to security@kernel.org about this two weeks ago, but hadn't written a PoC back then]
+
+After the last BPF bug, I realized that BPF seems to only be applying
+array index masking for array map lookup; but not for pointer
+arithmetic inside an array element. (If it had actually masked the
+out-of-bounds access I did that way, I wouldn't have seen a kernel
+crash...)
+It is still possible to do speculative out-of-bounds accesses that
+way, approximately like this:
+
+load a map value pointer into R6
+load an index into R7
+do a slow computation (e.g. with a memory dependency) that loads a
+limit into R8 (e.g. load the limit from a map for high latency, then
+mask it to make the verifier happy)
+exit if R7 >= R8 (mispredicted branch)
+load R0 = R6[R7]
+load R0 = R6[R0]
+I'm attaching a PoC that works on a machine I'm testing on if you enable the eBPF JIT.
+Tested on 4.17.17.
+My test machine is a NUMA machine with two "Intel Xeon E5-2690 v4 @ 2.60GHz" processors.
+
+Compile with "gcc -pthread -o bpf_stuff bpf_stuff.c -Wall -ggdb -std=gnu99".
+
+Invocation: "./bpf_stuff <main-cpu> <bounce-cpu> <hex-offset> <hex-length>", where main-cpu and bounce-cpu are the IDs of logical CPUs to which the two threads should be pinned. They should not be on the same physical core; I've mostly been testing with the two threads pinned to the two different processors.
+
+This bug is subject to a 90 day disclosure deadline. After 90 days elapse
+or a patch has been made broadly available (whichever is earlier), the bug
+report will become visible to the public.
