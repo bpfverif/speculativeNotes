@@ -1,0 +1,30 @@
+== INTRODUCTION ==
+This is a bug report about a CPU security issue that affects
+processors by Intel, AMD and (to some extent) ARM.
+
+I have written a PoC for this issue that, when executed in userspace
+on an Intel Xeon CPU E5-1650 v3 machine with a modern Linux kernel,
+can leak around 2000 bytes per second from Linux kernel memory after a
+~4-second startup, in a 4GiB address space window, with the ability to
+read from random offsets in that window. The same thing also works on
+an AMD PRO A8-9600 R7 machine, although a bit less reliably and slower.
+
+On the Intel CPU, I also have preliminary results that suggest that it
+may be possible to leak host memory (which would include memory owned
+by other guests) from inside a KVM guest.
+
+The attack doesn't seem to work as well on ARM - perhaps because ARM
+CPUs don't perform as much speculative execution because of a
+different performance-energy-tradeoff or so?
+
+All PoCs are written against specific processors and will likely
+require at least some adjustments before they can run in other
+environments, e.g. because of hardcoded timing tresholds.
+
+****
+Apparently our issue tracker can't handle overly long writeups, so I have attached the full writeup as a textfile instead.
+****
+
+This bug is subject to a 90 day disclosure deadline. After 90 days elapse
+or a patch has been made broadly available, the bug report will become
+visible to the public.
